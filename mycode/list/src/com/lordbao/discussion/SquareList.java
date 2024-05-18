@@ -1,6 +1,7 @@
-package com.lordbao.disc;
+package com.lordbao.discussion;
 
-import com.lordbao.course.IntList;
+import com.lordbao.course.intro.IntList;
+import com.lordbao.exercise.intro.Lists1Exercises;
 
 /**
  * @Author Lord_Bao
@@ -12,7 +13,7 @@ import com.lordbao.course.IntList;
  * https://sp18.datastructur.es/materials/discussion/disc02.pdf
  *
  * This one is quite similar to List1Exercises1
- * @see com.lordbao.exercise.Lists1Exercises
+ * @see Lists1Exercises
  *
  */
 public class SquareList {

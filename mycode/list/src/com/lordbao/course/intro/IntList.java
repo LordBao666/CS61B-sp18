@@ -1,4 +1,4 @@
-package com.lordbao.course;
+package com.lordbao.course.intro;
 
 public class IntList {
 	public int first;

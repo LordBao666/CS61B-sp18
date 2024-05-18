@@ -1,6 +1,6 @@
-package com.lordbao.exercise;
+package com.lordbao.exercise.intro;
 
-import com.lordbao.course.IntList;
+import com.lordbao.course.intro.IntList;
 
 public class Lists1Exercises {
     /** Returns an IntList identical to L, but with
