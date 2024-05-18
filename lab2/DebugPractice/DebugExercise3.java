@@ -1,5 +1,9 @@
 /**
  * Created by jug on 1/22/18.
+ *
+ * The code is correct.
+ * However,food.csv provides  wrong data  on line 89 which is "kroger turnip 0.45 -387128732".
+ * You can find that the num of available is negative( -387128732),and it can not be.
  */
 public class DebugExercise3 {
     public static int countTurnips(In in) {
