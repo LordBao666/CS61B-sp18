@@ -73,6 +73,10 @@ public class SLList {
         }
     }
 
+    public boolean isEmpty(){
+        return size==0;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -86,6 +90,49 @@ public class SLList {
 
         return sb.toString();
     }
+
+    /**
+     * The exercise comes from https://sp18.datastructur.es/materials/discussion/disc03.pdf
+     *
+     * Add a method to the SLList class that reverses the elements. Do this using
+     * the existing IntNodes (you should not use new).Try it in both recursive and iterative ways
+     * */
+
+    public void reverseByIteration(){
+        if(isEmpty()) return;
+        //retain the second node
+        IntNode p =sentinel.next.next;
+        //the first node will become the last node  at last,so :
+        sentinel.next.next=null;
+        while (p!=null){
+            IntNode q = p.next;
+            p.next=sentinel.next;
+            sentinel.next=p;
+            p=q;
+        }
+    }
+
+    public void reverseByRecursion(){
+        if(isEmpty()) return;
+        //get the last node,note  that after reversing,the last node will become the first one
+        IntNode p = sentinel.next;
+        while (p.next!=null){
+            p=p.next;
+        }
+        reverseHelper(sentinel.next);
+        sentinel.next=p;
+    }
+
+    private IntNode reverseHelper(IntNode p){
+        if(p==null) return null;
+        if(p.next==null) return p;
+        // get the  rest list's last node
+        IntNode q=reverseHelper(p.next);
+        q.next=p;
+        p.next=null;
+        return p;
+    }
+
 
     /*The comment below are size() methods without the instance variable of size.
     * As the number of items grow, efficiency of  size() methods will drop fast.
