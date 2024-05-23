@@ -146,7 +146,7 @@ public class LinkedListDeque<T> {
      * If no such item exists, returns null. Must not alter the deque
      */
     public T get(int index) {
-        if (isEmpty()) {
+        if (index < 0 || index >= size) {
             return null;
         }
         Node<T> p;
@@ -167,5 +167,28 @@ public class LinkedListDeque<T> {
             }
         }
         return p.data;
+    }
+
+    /**
+     * get the item at the index by using recursion
+     */
+    public T getRecursive(int index) {
+        if (index < 0 || index >= size) {
+            return null;
+        }
+        return getRecursive(sentinel.next, index);
+    }
+
+    /**
+     * assume node is null, and it is the first node.
+     * return the index item
+     */
+    private T getRecursive(Node<T> node, int index) {
+        if (index == 0) {
+            return node.data;
+        } else {
+            return getRecursive(node.next, index - 1);
+        }
+
     }
 }

@@ -116,11 +116,26 @@ public class LinkedListDequeTest {
         System.out.println(list.get(4));
     }
 
+    public static void testGetRecursive() {
+        LinkedListDeque<Integer> list = new LinkedListDeque<>();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.addLast(5);
+        System.out.println(list.getRecursive(0));
+        System.out.println(list.getRecursive(1));
+        System.out.println(list.getRecursive(2));
+        System.out.println(list.getRecursive(3));
+        System.out.println(list.getRecursive(4));
+    }
+
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
         //addIsEmptySizeTest();
         //addRemoveTest();
         //testAddAndRemove();
-        testGet();
+        //testGet();
+        testGetRecursive();
     }
 } 

@@ -69,14 +69,14 @@ public class ArrayDeque<T> {
     private void resize(int newCapacity) {
         Object[] newItems = new Object[newCapacity];
         int p = (nextFirst + 1) % capacity; //p is used to scan the original items
-        int q = p % newCapacity; //q is used to scan the new items
+        int q = (nextFirst + 1) % newCapacity; //q is used to scan the new items
         for (int i = 0; i < size; i++) { //The number of items copied is size
             newItems[q] = items[p];
             items[p] = null; //avoid loitering
             p = (p + 1) % capacity; //move p
             q = (q + 1) % newCapacity; //move q
         }
-        // nextFirst=nextFirst; //nextFirst doesn't change
+        nextFirst = nextFirst%newCapacity;
         nextLast = q;
         capacity = newCapacity;
         items = newItems;
