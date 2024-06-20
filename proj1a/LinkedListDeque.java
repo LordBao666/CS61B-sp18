@@ -7,16 +7,17 @@
  * https://joshhug.gitbooks.io/hug61b/content/chap2/chap23.html#:~:text=An-,alternate%20approach,-is%20to%20implement
  * shows.
  * <p>
- * However,I change it a little, I state 2 more invariants:
- * 1 the sentinel node's next must be the first item.
- * 2 The sentinel node's prev must be the last item.
- * The invariants  just make the code more understandable.
- * <p>
  * Some invariants must be  NOTED:
- * 1 the first item's(if exists) prev must be the last item.
- * 2 the last item's(if exists) next must be the first item.
+ * 1 If size = 0, sentinel node's next and sentinel node's prev must be sentinel itself.
+ * 2 If size > 0,
+ * 2.1 the sentinel node's next must be the first item ;
+ * 2.2 the sentinel node's prev must be the last item ;
+ * 2.3 the last item's next is sentinel ;
+ * 2.4 the first item's prev is sentinel.
  */
+
 public class LinkedListDeque<T> {
+
     private static class Node<E> {
         public Node<E> prev;
         public Node<E> next;
@@ -27,23 +28,22 @@ public class LinkedListDeque<T> {
             this.next = next;
             this.data = data;
         }
-
     }
 
     private final Node<T> sentinel;
     private int size;
 
+
     public LinkedListDeque() {
         sentinel = new Node<>(null, null, null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
     public LinkedListDeque(T data) {
-        Node<T> node = new Node<>(null, null, data);
-        node.prev = node;
-        node.next = node;
-        sentinel = new Node<>(node, node, null);
-        size = 1;
+        this();
+        addFirst(data);
     }
 
     /**
@@ -59,39 +59,18 @@ public class LinkedListDeque<T> {
 
 
     public void addFirst(T data) {
-        if (isEmpty()) {
-            Node<T> node = new Node<>(null, null, data);
-            node.next = node;
-            node.prev = node;
-            sentinel.prev = node;
-            sentinel.next = node;
-            size = 1;
-        } else {
-            //node's prev is the last item,and its next is the first item
-            Node<T> node = new Node<>(sentinel.prev, sentinel.next, data);
-            //the first item's prev is node now
-            sentinel.next.prev = node;
-            //the last item's next is node now
-            sentinel.prev.next = node;
-            //NOW ,the first item is node
-            sentinel.next = node;
-            size++;
-        }
+        Node<T> node = new Node<>(sentinel, sentinel.next, data);
+        sentinel.next.prev = node;
+        sentinel.next = node;
+        size++;
     }
 
-    //The logic is similar to addFirst
+
     public void addLast(T data) {
-        if (isEmpty()) {
-            addFirst(data);
-        } else {
-            //The code of the first three lines is same as the one of addFirst,
-            // draw a picture ,and you will know.
-            Node<T> node = new Node<>(sentinel.prev, sentinel.next, data);
-            sentinel.next.prev = node;
-            sentinel.prev.next = node;
-            sentinel.prev = node;
-            size++;
-        }
+        Node<T> node = new Node<>(sentinel.prev, sentinel, data);
+        sentinel.prev.next = node;
+        sentinel.prev = node;
+        size++;
     }
 
     /**
@@ -119,8 +98,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         Node<T> p = sentinel.next;
-        p.next.prev = sentinel.prev;
-        sentinel.prev.next = p.next;
+        p.next.prev = sentinel;
         sentinel.next = p.next;
         size--;
         return p.data;
@@ -134,8 +112,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         Node<T> p = sentinel.prev;
-        p.prev.next = sentinel.next;
-        sentinel.next.prev = p.prev;
+        p.prev.next = sentinel;
         sentinel.prev = p.prev;
         size--;
         return p.data;
@@ -180,8 +157,8 @@ public class LinkedListDeque<T> {
     }
 
     /**
-     * assume node is null, and it is the first node.
-     * return the index item
+     * assume node is not null and the first node,  0 <= index <size
+     * return the item at the index.
      */
     private T getRecursive(Node<T> node, int index) {
         if (index == 0) {
@@ -189,6 +166,5 @@ public class LinkedListDeque<T> {
         } else {
             return getRecursive(node.next, index - 1);
         }
-
     }
 }
