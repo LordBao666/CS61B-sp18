@@ -16,7 +16,9 @@
  * 2.4 the first item's prev is sentinel.
  */
 
+
 public class LinkedListDeque<T> implements Deque<T> {
+
 
     private static class Node<E> {
         public Node<E> prev;
