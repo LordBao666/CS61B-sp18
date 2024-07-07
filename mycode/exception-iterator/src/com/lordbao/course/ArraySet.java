@@ -1,8 +1,6 @@
 package com.lordbao.course;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -117,7 +115,7 @@ public class ArraySet<T> implements Iterable<T> {
         }
 
         for (int i = 0; i < size; i++) {
-            if (!Objects.equals(items[i], otherArrSet.items[i])) {
+            if (!otherArrSet.contains((T)items[i])) {
                 return false;
             }
         }

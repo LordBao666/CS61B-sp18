@@ -2,10 +2,8 @@ package com.lordbao.course;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * @Author Lord_Bao
@@ -16,14 +14,15 @@ public class TestArraySet {
 
     @Test
     public void testEquals() {
-//        ArraySet<String> set = new ArraySet<>();
-        ArraySetCourse<String> set = new ArraySetCourse<>();
+        ArraySet<String> set = new ArraySet<>();
+//        ArraySetCourse<String> set = new ArraySetCourse<>();
         set.add("hi");
         set.add("hello");
-//        ArraySet<Object> set1 = new ArraySet<>();
-        ArraySetCourse<Object> set1 = new ArraySetCourse<>();
-        set1.add("hi");
+        ArraySet<Object> set1 = new ArraySet<>();
+//        ArraySetCourse<Object> set1 = new ArraySetCourse<>();
         set1.add("hello");
+        set1.add("hi");
+
         assertEquals(set, set1);
 
         set1.add(1);
