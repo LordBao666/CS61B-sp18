@@ -54,6 +54,13 @@ public class TestGuitarString {
     }
 */
 
+    @Test
+    public void myTest(){
+        for(int i=0;i<100;i++){
+            StdAudio.play(.33);
+        }
+
+    }
     /** Calls tests for GuitarString. */
     public static void main(String[] args) {
         jh61b.junit.textui.runClasses(TestGuitarString.class);
