@@ -50,4 +50,6 @@ $RECYCLE.BIN/
 *.lnk
 .idea
 
+!pom.xml
 out
+target
