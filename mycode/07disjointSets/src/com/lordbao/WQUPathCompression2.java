@@ -5,6 +5,7 @@ package com.lordbao;
  * @Author Lord_Bao
  * @Date 2024/10/25 20:42
  * @Version 1.0
+ * 不带小挂大的路径压缩
  */
 public class WQUPathCompression2 implements  DisjointSets{
     private int [] parent;
@@ -37,7 +38,9 @@ public class WQUPathCompression2 implements  DisjointSets{
 
         int parent1 = findParent(p);
         int parent2 = findParent(q);
-
+        if(parent1==parent2){//已经属于同一个连通分量
+            return;
+        }
         parent[parent1]=parent2;
     }
 

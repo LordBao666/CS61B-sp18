@@ -5,6 +5,8 @@ package com.lordbao;
  * @Author Lord_Bao
  * @Date 2024/10/25 20:42
  * @Version 1.0
+ *
+ * 小挂大
  */
 public class WeightedQuickUnionDS implements  DisjointSets{
     private int [] parent;
@@ -29,7 +31,11 @@ public class WeightedQuickUnionDS implements  DisjointSets{
 
         int parent1 = findParent(p);
         int parent2 = findParent(q);
-
+        //如果p和q已经属于同一个分量,则程序结束
+        //更重要的是,此处避免了当p=q时,使得parent[p]=p本身的错误代码
+        if(parent1==parent2){
+            return;
+        }
         int size1 = -parent[parent1];
         int size2 = -parent[parent2];
         if(size1<size2){

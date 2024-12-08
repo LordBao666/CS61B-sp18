@@ -5,6 +5,8 @@ package com.lordbao;
  * @Author Lord_Bao
  * @Date 2024/10/25 20:42
  * @Version 1.0
+ *
+ * 树低挂树高
  */
 public class WeightedQuickUnionDS2 implements  DisjointSets{
     private int [] parent;
@@ -35,11 +37,16 @@ public class WeightedQuickUnionDS2 implements  DisjointSets{
 
     @Override
     public void connect(int p, int q) {
-        int height1 = height(p);
-        int height2 = height(q);
         int parent1 = findParent(p);
         int parent2 = findParent(q);
+        //如果p和q已经属于同一个分量,则程序结束
+        //更重要的是,此处避免了当p=q时,使得parent[p]=p本身的错误代码
+        if(parent1==parent2){
+            return;
+        }
 
+        int height1 = height(p);
+        int height2 = height(q);
         if(height1<height2){
             parent[parent1]=parent2;
         }else {
